@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<title>
+This is a test!!!
+</title>
+<style>
+tr{height:20px}
+td{font-family:Arial;padding:5px}
+button{font-family:Arial;padding:5px}
+.row{height:50px}
+.cell{font:Arial}
+</style>
+<script type=text/javascript>
+var expect = new Array("","","","","","","");
+var corner = new Array("","","","","");
+var exist = new Array();
+var existc = new Array();
+var start = new Date().getTime();
+var remTime = new Date().getTime();
+var end = new Date().getTime();
+var canRepeat = "false";
+var state = true;
+var members = new Array();
+var round_count=0;
+var round_right_count=0;
+var success_length=0;
+var success_memory_time=0;
+var success_total_time=0;
+
+//var members = new Array("1","2","3","4","5","6","7","8","9","0",
+//						"A","B","C","D","E","F","G","H","I","J",
+//						"K","L","M","N","O","P","Q","R","S","T",
+//						"U","V","W","X","Y","Z");
+
+function clearAll(){
+	var obj = document.all("member");
+	for(var i=0; i<obj.length; i++){
+		obj[i].checked = false;
+	}
+}
+
+function checkAll(){
+	var obj = document.all("member");
+	for(var i=0; i<obj.length; i++){
+		obj[i].checked = true;
+	}
+}
+
+function checkNumber(){
+	var obj = document.all("member");
+	for(var i=0; i<10; i++){
+		obj[i].checked = true;
+	}
+	for(var i=10; i<obj.length; i++){
+		obj[i].checked = false;
+	}
+}
+
+function checkChar(){
+	var obj = document.all("member");
+	for(var i=0; i<10; i++){
+		obj[i].checked = false;
+	}
+	for(var i=10; i<obj.length; i++){
+		obj[i].checked = true;
+	}
+	  obj[obj.length-5].checked =false;
+	  obj[obj.length-6].checked =false;
+	  setMembers();
+}
+
+function setMembers(){
+	members = new Array();
+	var obj = document.all("member");
+	var j=0;
+	for(var i=0; i<obj.length; i++){
+		if(obj[i].checked){
+			members[j] = obj[i].value;
+			j++
+		}
+	}
+}
+
+function getRandom(){
+	var r = Math.random();
+	var step = 1/(members.length);
+	for(var i=step, j=0; i<=1; i+=step, j++){
+		if(r<i){
+			return members[j];
+		}
+	}
+	return members[members.length-1];
+}
+
+function clearResult(all){
+	document.all("answer").innerText="";
+	var obj = document.all("expect");
+	var objc= document.all("corner");
+	for(var i=0; i<obj.length; i++){
+		document.all("expect")[i].value = "";
+		document.all("expect")[i].style.color="black";
+	}
+	
+	for(var i=0; i<objc.length; i++){
+		document.all("corner")[i].value = "";
+		document.all("corner")[i].style.color="black";
+	}
+
+	if(all == "all"){
+		obj =  document.all("result");
+		objc = document.all("corner");
+		for(var i=0; i<obj.length; i++){
+			document.all("result")[i].value = "";
+		}
+		for(var i=0; i<objc.length; i++){
+			document.all("cornerresult")[i].value = "";
+		}
+	}
+}
+
+function checkResult(){
+	clearTimeout(timeID);
+	end = new Date().getTime();
+	var correct = true;
+	for(var i=0; i<7; i++){
+		document.all("expect")[i].value = expect[i];
+		if(document.all("expect")[i].value != document.all("result")[i].value.toUpperCase()){
+		    document.all("expect")[i].style.color= "red";
+			correct = false;
+		}
+	}
+	
+	for(var i=0; i<5; i++){
+		document.all("corner")[i].value = corner[i]; 
+		if(document.all("corner")[i].value != document.all("cornerresult")[i].value.toUpperCase()){
+		    document.all("corner")[i].style.color= "red";
+			correct = false;
+		}
+	}
+	if(document.all("corner")[0].value!="" | document.all("expect")[0].value!=""){ 
+    	if(correct){
+	    	document.all("answer").innerText="回答正确!!!太有才了!!!\n"
+	    	+"记忆时间: "+(remTime-start)/1000+"秒\n总时间: "+(end-start)/1000+"秒";
+	    	document.all("answer").style.color="red";
+	    	round_right_count++;
+			success_memory_time+=((remTime-start)/1000);
+			success_total_time+=((end-start)/1000);
+        
+		 	var obj,objc,randomNum,randomNumc;		
+  			  obj = document.all("group");
+			objc = document.all("groupc");
+	
+			for(var k=0; k<obj.length; k++){
+				if(obj[k].checked){
+					randomNum = obj[k].value *1;
+				}
+			}
+	
+			for(var k=0;k<objc.length; k++){
+				if(objc[k].checked){
+					randomNumc = objc[k].value*1;
+				}
+			}
+			success_length+=randomNum;
+			success_length+=randomNumc;
+    	}
+	    else{
+	    	document.all("answer").innerText="回答错误!!!继续努力!!!\n"
+		    +"记忆时间: "+(remTime-start)/1000+"秒\n总时间: "+(end-start)/1000+"秒";
+	  	    document.all("answer").style.color="green";
+	    }
+		round_count++;
+		
+	}
+	
+	document.all("round").innerText="您本轮一共练习了"+round_count+"次,成功了"+round_right_count+"次，成功率为"+(round_right_count/round_count*100).toFixed(2)+"%"+"\n\n平均每个组合记忆时间为:"+(success_memory_time/success_length).toFixed(2)+"秒，平均每个组合的总时间为:"+(success_total_time/success_length).toFixed(2)+"秒。";
+	state = false;
+}
+
+var timeID;
+var randomNum;
+var randomNumc;
+var onoff = false;
+function startTest(){
+	clearResult('all');
+	clearTimeout(timeID);
+	if(checkPrereqFailed()){
+		return false;
+	}
+	exist = new Array();
+	existc = new Array();
+	start = new Date().getTime();
+	remTime = new Date().getTime();
+	for(var i=0; i<randomNum/2; i++){
+		var letter = getRandom();
+		if(canRepeat == "false"){
+			while(exist["#"+letter] == 1){
+				letter = getRandom();
+			}
+		}
+		document.all("expect")[i].value += letter;
+		exist["#"+letter] = 1;
+		letter = getRandom();
+		if(canRepeat == "false"){
+			while(exist["#"+letter] == 1){
+				letter = getRandom();
+			}
+		}
+		document.all("expect")[i].value += letter;
+		exist["#"+letter] = 1;
+		expect[i] = document.all("expect")[i].value;
+	}
+	for(var i=randomNum/2; i<7; i++){
+		expect[i] = "";
+	}
+	
+	for(var i=0; i<randomNumc/2; i++){
+		var letter = getRandom();
+		if(canRepeat == "false"){
+			while(existc["#"+letter] == 1){
+				letter = getRandom();
+			}
+		}
+		document.all("corner")[i].value += letter;
+		existc["#"+letter] = 1;
+		letter = getRandom();
+		if(canRepeat == "false"){
+			while(existc["#"+letter] == 1){
+				letter = getRandom();
+			}
+		}
+		document.all("corner")[i].value += letter;
+		existc["#"+letter] = 1;
+		corner[i] = document.all("corner")[i].value;
+		
+	}
+	for(var i=randomNumc/2; i<5; i++){
+	    corner[i] = "";
+	}
+	
+	document.all("result")[0].focus();
+	onoff = true;
+	state = true;
+	
+	timeID = setTimeout("clearResult()", document.all("time").value*1000);
+}
+
+function checkInput(i){
+	if(onoff){
+		clearResult();
+		remTime = new Date().getTime();
+		onoff = false;
+	}
+	
+	obj = document.all("group");
+	
+	
+	for(var q=0; q<obj.length; q++){
+		if(obj[q].checked){
+			randomNum = obj[q].value * 2;
+		}
+	}
+   
+    if((i==(randomNum/2-1))  && document.all("result")[randomNum/2-1].value.length >= 2 ) 
+	     document.all("cornerresult")[0].focus();
+    else  if( i >= 0 && i < randomNum/2 -1 ){ 
+		   if( document.all("result")[i].value.length >= 2 )
+		    document.all("result")[i+1].focus();
+	} 	 
+    else  if(i>randomNum/2 && i!= 11 ){
+	  if(document.all("cornerresult")[i-7].value.length >= 2 && i> randomNum/2)
+		document.all("cornerresult")[i-7+1].focus();	 
+	}	
+
+	if(event.keyCode == 13){
+		if(state){
+			checkResult();
+		}
+		else{
+			startTest();
+		}
+	}
+}
+
+function checkPrereqFailed(){
+	var obj = document.all("repeat");
+	for(var i=0; i<obj.length; i++){
+		if(obj[i].checked){
+			canRepeat = obj[i].value;
+		}
+	}
+	obj = document.all("group");
+	objc = document.all("groupc");
+	
+	for(var i=0; i<obj.length; i++){
+		if(obj[i].checked){
+			randomNum = obj[i].value * 2;
+		}
+	}
+	
+	for(var i=0; i<objc.length; i++){
+		if(objc[i].checked){
+			randomNumc = objc[i].value * 2;
+		}
+	}
+	
+	if(canRepeat == "true"){
+		if(members.length<2){
+			alert("Check which you want to use, at least 2, then click 'Set' button\n\n"
+			+"选择你要用的数字或字符，最少2个，然后点'设定'按钮");
+			return true;
+		}
+	}
+	else{
+		if(members.length<randomNum){
+			alert("Check which you want to use, at least "+randomNum+", then click 'Set' button\n\n"
+			+"选择你要用的数字或字符，最少"+randomNum+"个，然后点'设定'按钮");
+			return true;
+		}
+	}
+	if(isNaN(document.all("time").value) || document.all("time").value<=0){
+		alert("Time Interval must be a number and larger then 0\n\n显示时间必须是数字并大于0");
+		return true;
+	}
+	return false;
+}
+</script>
+</head>
+
+<body>
+<table border="0" align="center">
+	<tr><td width="400" valign="top">
+	<table>
+		<tr>
+		  <td colspan=5 style="font-size:20;color:red">
+		作者：瓦希礼，纪海
+		 盗版：Roundy</td>
+		</tr>
+		<tr><td colspan=5 style="color:blue">
+		Check what to use, then click 'Set' button:<br><br>
+		选择你要用的数字或字符，然后点'设定'按钮:
+		</td></tr>
+		<tr><td>
+		<input id="member" name="member" type=checkbox value="1"> 1 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="2"> 2 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="3"> 3 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="4"> 4 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="5"> 5 
+		</td></tr><tr><td>
+		<input id="member" name="member" type=checkbox value="6"> 6 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="7"> 7 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="8"> 8 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="9"> 9 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="0"> 0 
+		</td></tr><tr><td>
+		<input id="member" name="member" type=checkbox value="A"> A 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="B"> B 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="C"> C 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="D"> D 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="E"> E 
+		</td></tr><tr><td>
+		<input id="member" name="member" type=checkbox value="F"> F 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="G"> G 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="H"> H 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="I"> I 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="J"> J 
+		</td></tr><tr><td>
+		<input id="member" name="member" type=checkbox value="K"> K 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="L"> L 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="M"> M 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="N"> N 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="O"> O 
+		</td></tr><tr><td>
+		<input id="member" name="member" type=checkbox value="P"> P 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="Q"> Q 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="R"> R 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="S"> S 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="T"> T 
+		</td></tr><tr><td>
+		<input id="member" name="member" type=checkbox value="U"> U 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="V"> V 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="W"> W 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="X"> X 
+		</td><td>
+		<input id="member" name="member" type=checkbox value="Y"> Y 
+		</td></tr><tr><td>
+		<input id="member" name="member" type=checkbox value="Z"> Z 
+		</td>
+		<td colspan="4" align="right">允许重复：
+			<input id="repeat" name="repeat" type=radio checked value=false> 否
+			<input id="repeat" name="repeat" type=radio value=true> 是
+		</td></tr>
+		<tr><td colspan=5>
+		<button onClick="clearAll()">Clear<br>清除</button>
+		<button onClick="checkAll()">All<br>全选</button>
+		<button onClick="checkNumber()">Number<br>数字</button>
+		<button onClick="checkChar()">Char<br>字母</button>&nbsp;&nbsp;
+		<button onClick="setMembers()">Set<br>设定</button>
+		</td></tr>
+	</table>
+	<table border="0" align="center">
+		<tr class="row">
+			<td id="round" style="color:green;font-size:20"> </td>
+		</tr>
+	</table>
+	</td>
+	<td valign="top">|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>
+	|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>
+	</td>
+	<td valign="top" width="600" >
+	<table border="0" align="top">
+		<br><BR>
+		<tr class="row">
+			<td class="cell"><input id="expect" name="expect" type=text size=5 maxLength=2 readonly></td>
+			<td class="cell"><input id="expect" name="expect" type=text size=5 maxLength=2 readonly></td>
+			<td class="cell"><input id="expect" name="expect" type=text size=5 maxLength=2 readonly></td>
+			<td class="cell"><input id="expect" name="expect" type=text size=5 maxLength=2 readonly></td>
+			<td class="cell"><input id="expect" name="expect" type=text size=5 maxLength=2 readonly></td>
+			<td class="cell"><input id="expect" name="expect" type=text size=5 maxLength=2 readonly></td>
+			<td class="cell"><input id="expect" name="expect" type=text size=5 maxLength=2 readonly></td>
+		</tr>
+		<tr class="row">
+			<td class="cell"><input id="result" name="result" type=text size=5 maxLength=2 onKeyUp="checkInput(0)"></td>
+			<td class="cell"><input id="result" name="result" type=text size=5 maxLength=2 onKeyUp="checkInput(1)"></td>
+			<td class="cell"><input id="result" name="result" type=text size=5 maxLength=2 onKeyUp="checkInput(2)"></td>
+			<td class="cell"><input id="result" name="result" type=text size=5 maxLength=2 onKeyUp="checkInput(3)"></td>
+			<td class="cell"><input id="result" name="result" type=text size=5 maxLength=2 onKeyUp="checkInput(4)"></td>
+			<td class="cell"><input id="result" name="result" type=text size=5 maxLength=2 onKeyUp="checkInput(5)"></td>
+			<td class="cell"><input id="result" name="result" type=text size=5 maxLength=2 onKeyUp="checkInput(6)"></td>
+		</tr>
+
+		<tr class="row">
+			<td colspan="2">
+				<button onClick="clearResult('all')">Clear<br>清除</button>
+			</td>
+			<td colspan="2">
+				<button onClick="startTest()">Start<br>开始</button>
+			</td>
+			<td colspan="2">
+				<button onClick="checkResult()">Check<br>检查</button>
+			</td>
+		</tr>
+		
+		<tr class="row">
+			<td class="cell"><input name="corner" type=text id="corner" size=5 maxLength=2 readonly></td>
+			<td class="cell"><input id="corner" name="corner" type=text size=5 maxLength=2 readonly></td>
+			<td class="cell"><input id="corner" name="corner" type=text size=5 maxLength=2 readonly></td>
+			<td class="cell"><input id="corner" name="corner" type=text size=5 maxLength=2 readonly></td>
+			<td class="cell"><input id="corner" name="corner" type=text size=5 maxLength=2 readonly></td>
+		</tr>
+		<tr class="row">
+			<td class="cell"><input id="cornerresult" name="cornerresult" type=text size=5 maxLength=2 onKeyUp="checkInput(7)"></td>
+			<td class="cell"><input id="cornerresult" name="cornerresult" type=text size=5 maxLength=2 onKeyUp="checkInput(8)"></td>
+			<td class="cell"><input id="cornerresult" name="cornerresult" type=text size=5 maxLength=2 onKeyUp="checkInput(9)"></td>
+			<td class="cell"><input id="cornerresult" name="cornerresult" type=text size=5 maxLength=2 onKeyUp="checkInput(10)"></td>
+			<td class="cell"><input id="cornerresult" name="cornerresult" type=text size=5 maxLength=2 onKeyUp="checkInput(11)"></td>
+		 </tr>
+
+		
+		<tr class="row">
+			<td colspan="6">Random Group Edge <br>
+			  随机组棱:&nbsp;&nbsp;
+			  <input id="group" name="group" type=radio value=0> 0&nbsp;&nbsp;
+			  <input id="group" name="group" type=radio value=4> 4 &nbsp;&nbsp;
+			<input id="group" name="group" type=radio value=5> 5 &nbsp;&nbsp;
+			<input id="group" name="group" type=radio checked value=6> 6 &nbsp;&nbsp;
+		  <input id="group" name="group" type=radio  value=7> 7</td>
+		</tr>
+		<tr class="row">
+			<td colspan="6">Random Group Corner <br>
+			  随机组角:&nbsp;&nbsp;
+			  <input id="groupc" name="groupc" type=radio value=0> 0 &nbsp;&nbsp;
+			<input id="groupc" name="groupc" type=radio value=3> 3 &nbsp;&nbsp;
+			<input id="groupc" name="groupc" type=radio checked  value=4> 4 &nbsp;&nbsp;
+		  <input id="groupc" name="groupc" type=radio value=5> 5</td>
+		</tr>
+		<tr class="row">
+			<td colspan="6">Time Interval<br>显示时间:<input id="time" name="time" type=text size=5 value=15>
+			s</td>
+		</tr>
+	</table>
+	<table border="0" align="center">
+		<tr class="row">
+			<td id="answer" style="color:red;font-size:40"> </td>
+		</tr>
+	</table>
+	</td></tr>
+</table>
+
+</body>
+</html>
