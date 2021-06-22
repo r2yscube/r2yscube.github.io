@@ -1,0 +1,229 @@
+[{
+	"group": "oll",
+	"id": "1",
+	"alg": ["R U2 R2' F R F' U2 R' F R F'"]
+}, {
+	"group": "oll",
+	"id": "2",
+	"alg": ["r U R' U2 R U2 r' U2 r U' r'","R U' R2 D' r U r' D R2 U R'"]
+}, {
+	"group": "oll",
+	"id": "3",
+	"alg": ["R' F2 R2 U2 R' F R U2 R2 F2 R"]
+}, {
+	"group": "oll",
+	"id": "4",
+	"alg": ["R' F2 R2 U2 R' F' R U2 R2 F2 R"]
+}, {
+	"group": "oll",
+	"id": "5",
+	"alg": ["r' U2 R U R' U r"]
+}, {
+	"group": "oll",
+	"id": "6",
+	"alg": ["r U2 R' U' R U' r'"]
+}, {
+	"group": "oll",
+	"id": "7",
+	"alg": ["r U R' U R U2 r'"]
+}, {
+	"group": "oll",
+	"id": "8",
+	"alg": ["r' U' R U' R' U2 r"]
+}, {
+	"group": "oll",
+	"id": "9",
+	"alg": ["R U R' U' R' F R2 U R' U' F'"]
+}, {
+	"group": "oll",
+	"id": "10",
+	"alg": ["R U R' U R' F R F' R U2 R'"]
+}, {
+	"group": "oll",
+	"id": "11",
+	"alg": ["S R U R' U R U2 R' U2 S'"]
+}, {
+	"group": "oll",
+	"id": "12",
+	"alg": ["M' R' U' R U' R' U2 R U' r' R"]
+}, {
+	"group": "oll",
+	"id": "13",
+	"alg": ["F U R U' R2 F' R U R U' R'"]
+}, {
+	"group": "oll",
+	"id": "14",
+	"alg": ["R' F R U R' F' R F U' F'"]
+}, {
+	"group": "oll",
+	"id": "15",
+	"alg": ["r' U' r R' U' R U r' U r"]
+}, {
+	"group": "oll",
+	"id": "16",
+	"alg": ["r U r' R U R' U' r U' r'"]
+}, {
+	"group": "oll",
+	"id": "17",
+	"alg": ["F R' F' R U S' R U' R' S"]
+}, {
+	"group": "oll",
+	"id": "18",
+	"alg": ["R U2 R2' F R F' U2 r R' U R U' r'"]
+}, {
+	"group": "oll",
+	"id": "19",
+	"alg": ["S' R U R' S U' R' F R F'"]
+}, {
+	"group": "oll",
+	"id": "20",
+	"alg": ["S' R U R' S U' M' U R U' r'"]
+}, {
+	"group": "oll",
+	"id": "21",
+	"alg": ["R U R' U R U' R' U R U2 R'","R U2 R' U' R U R' U' R U' R'"]
+}, {
+	"group": "oll",
+	"id": "22",
+	"alg": ["R U2 R2 U' R2 U' R2 U2 R"]
+}, {
+	"group": "oll",
+	"id": "23",
+	"alg": ["R2 D R' U2 R D' R' U2 R'","R2 D' R U2 R' D R U2 R"]
+}, {
+	"group": "oll",
+	"id": "24",
+	"alg": ["r U R' U' r' F R F'","R' F' r U R U' r' F"]
+}, {
+	"group": "oll",
+	"id": "25",
+	"alg": ["F' r U R' U' r' F R","F R' F' r U R U' r'"]
+}, {
+	"group": "oll",
+	"id": "26",
+	"alg": ["R U2 R' U' R U' R'","R' U' R U' R' U2 R","L' U' L U' L' U2 L"]
+}, {
+	"group": "oll",
+	"id": "27",
+	"alg": ["R U R' U R U2 R'","R' U2 R U R' U R","L' U2 L U L' U L"]
+}, {
+	"group": "oll",
+	"id": "28",
+	"alg": ["r U R' U' r' R U R U' R'"]
+}, {
+	"group": "oll",
+	"id": "29",
+	"alg": ["r2 D' r U r' D r2 U' r' U' r"]
+}, {
+	"group": "oll",
+	"id": "30",
+	"alg": ["r' D' r U' r' D r2 U' r' U r U r'"]
+}, {
+	"group": "oll",
+	"id": "31",
+	"alg": ["R' U' F U R U' R' F' R","F R' F' R U R U R' U' R U' R'"]
+}, {
+	"group": "oll",
+	"id": "32",
+	"alg": ["S R U R' U' R' F R f'"]
+}, {
+	"group": "oll",
+	"id": "33",
+	"alg": ["R U R' U' R' F R F'"]
+}, {
+	"group": "oll",
+	"id": "34",
+	"alg": ["F R U R' U' R' F' r U R U' r'","f R f' U' r' U' R U M'"]
+}, {
+	"group": "oll",
+	"id": "35",
+	"alg": ["R U2 R2 F R F' R U2 R'"]
+}, {
+	"group": "oll",
+	"id": "36",
+	"alg": ["R' F' U' F2 U R U' R' F' R"]
+}, {
+	"group": "oll",
+	"id": "37",
+	"alg": ["F R' F' R U R U' R'","F R U' R' U' R U R' F'"]
+}, {
+	"group": "oll",
+	"id": "38",
+	"alg": ["R U R' U R U' R' U' R' F R F'"]
+}, {
+	"group": "oll",
+	"id": "39",
+	"alg": ["f' r U r' U' r' F r S"]
+}, {
+	"group": "oll",
+	"id": "40",
+	"alg": ["f R' F' R U R U' R' S'","R' F R U R' U' F' U R"]
+}, {
+	"group": "oll",
+	"id": "41",
+	"alg": ["F U R2 D R' U' R D' R2 F'","R U R' U R U2 R' F R U R' U' F'"]
+}, {
+	"group": "oll",
+	"id": "42",
+	"alg": ["R' U' F2 u' R U R' D R2 B"]
+}, {
+	"group": "oll",
+	"id": "43",
+	"alg": ["R' U' F R' F' R U R"]
+}, {
+	"group": "oll",
+	"id": "44",
+	"alg": ["F U R U' R' F'"]
+}, {
+	"group": "oll",
+	"id": "45",
+	"alg": ["F R U R' U' F'","R' F' U' F U R"]
+}, {
+	"group": "oll",
+	"id": "46",
+	"alg": ["R' U' R' F R F' U R"]
+}, {
+	"group": "oll",
+	"id": "47",
+	"alg": ["F R' F' R U2 R U' R' U R U2 R'"]
+}, {
+	"group": "oll",
+	"id": "48",
+	"alg": ["F R U R' U' R U R' U' F'"]
+}, {
+	"group": "oll",
+	"id": "49",
+	"alg": ["r U' r2 U r2 U r2 U' r"]
+}, {
+	"group": "oll",
+	"id": "50",
+	"alg": ["r' U r2 U' r2 U' r2 U r'"]
+}, {
+	"group": "oll",
+	"id": "51",
+	"alg": ["F U R U' R' U R U' R' F'"]
+}, {
+	"group": "oll",
+	"id": "52",
+	"alg": ["R U R' U R U' B U' B' R'"]
+}, {
+	"group": "oll",
+	"id": "53",
+	"alg": ["r' U2 R U R' U' R U R' U r"]
+}, {
+	"group": "oll",
+	"id": "54",
+	"alg": ["r U2 R' U' R U R' U' R U' r'"]
+}, {
+	"group": "oll",
+	"id": "55",
+	"alg": ["R' F R U R U' R2' F' R2 U' R' U R U R'"]
+}, {
+	"group": "oll",
+	"id": "56",
+	"alg": ["r U r' U R U' R' U R U' R' r U' r'"]
+}, {
+	"group": "oll",
+	"id": "57",
+	"alg": ["R U R' U' M' U R U' r'","S R' F R S' R' F' R"]
+}]
