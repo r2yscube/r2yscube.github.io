@@ -71,7 +71,7 @@
         <thead>
             <tr>
                 <th class="sort" data-sort="id">编号</th>
-                <th>case打乱图</th>
+                <th colspan="2">case打乱图</th>
                 <th>
                     <input class="search" placeholder="输入公式或编号"/>
                 </th>
@@ -86,19 +86,28 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 <script type="text/javascript">
     var options = {
-        valueNames: ['group', 'id', 'alg', {name: 'img', attr: 'src'}],
+        valueNames: ['group', 'id', 'alg', {name: 'transImg', attr: 'src'}, {name: 'planImg', attr: 'src'}],
         item: '<tr>\n' +
             '                <td class="id"></td>\n' +
             '                <td>\n' +
-            '                    <img width="90" height="90" class="img">\n' +
+            '                    <img width="90" height="90" class="planImg">\n' +
+            '                </td>\n' +
+            '                <td>\n' +
+            '                    <img width="90" height="90" class="transImg">\n' +
             '                </td>\n' +
             '                <td class="alg"></td>\n' +
             '            </tr>'
     };
 
     var url = "../assets/cll.json";
+    /*
+        puzzle: sq1、skewb、mega、kilo、pyra
+        transform:horizontal
+        stage: cls
+     */
     var imgGenerator1 = "http://cubiclealgdbimagegen.azurewebsites.net/generator?puzzle=2&case=";
-    var imgGeenrator2 = "&view=plan&stage=cll";
+    var imgGeenrator2 = "&view=trans&stage=cll";
+    var planImg2 = "&view=plan&stage=cll";
     var request = new XMLHttpRequest();
     var cllList = [];
     request.open("get", url);
@@ -112,7 +121,8 @@
                     "group": item["group"],
                     "id": item["id"],
                     "alg": item["alg"].join("</br>"),
-                    "img": imgGenerator1 + item["alg"][0] + imgGeenrator2
+                    "transImg": imgGenerator1 + item["alg"][0] + imgGeenrator2,
+                    "planImg": imgGenerator1 + item["alg"][0] + planImg2
                 };
                 cllList.push(each);
             }
